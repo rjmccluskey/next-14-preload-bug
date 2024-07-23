@@ -15,13 +15,14 @@ Now, all those Links with a url pointing to the legacy application will cause in
 respond with 404s.
 
 After much experimentation, I discovered that having middleware defined (no matter how it's used) is the culprit. Even if
-I configure the middleware to exclude _next routes, we still get these errors.
+I configure the middleware to exclude _next routes, we still get these errors. We do not get the same errors when running
+the dev server, only in production.
 
 ## TLDR
 
-If you have middleware (middleware.ts file), the Link component will attempt to preload invalid routes resulting in lots
-of 404s. This only happens in production builds and does not go away even if you configure the middleware to ignore _next
-routes.
+If you have middleware (middleware.ts file), the Link component will attempt to preload routes that are not defined in the
+Next.js app, resulting in lots of 404s. This only happens in production builds and does not go away even if you configure
+the middleware to ignore _next routes.
 
 ## Reproduction Steps
 
